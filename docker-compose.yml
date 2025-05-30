@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rndwed
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    networks:
+      - laravel-network
+    ports:
+      - "9000:9000"
+
+  mysql:
+    image: mysql:5.7
+    container_name: rndweb-container
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rndpassword
+      MYSQL_DATABASE: rndweb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rndpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+
+volumes:
+  mysql-data:

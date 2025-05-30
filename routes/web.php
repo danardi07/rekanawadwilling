@@ -36,7 +36,6 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 
 // HALAMAN ADMIN (CRUD)
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('portfolio', PortfolioController::class);
     Route::resource('property', PropertyController::class);
     Route::resource('homestay', HomestayController::class);
 });

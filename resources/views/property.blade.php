@@ -452,6 +452,7 @@
             text-align: center;
             font-size: 1.1rem; /* Slightly larger font size for button */
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            cursor: pointer; /* Add cursor pointer to indicate it's clickable */
         }
 
         .property-card-content .card-button:hover {
@@ -783,43 +784,176 @@
                 width: 100%; /* Full width for buttons on very small screens */
                 margin-bottom: 10px; /* Add space between stacked buttons */
             }
-             .modal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+        }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 90%;
-  position: relative;
-  animation: fadeIn 0.3s ease-in-out;
-}
+        /* MODAL CSS */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
 
-.modal .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-}
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
 
-/* Optional animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            max-width: 700px; /* Max width for content */
+            width: 90%;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: modalSlideUp 0.4s forwards;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .modal .close-button:hover,
+        .modal .close-button:focus {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .modal-location {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-location i {
+            color: var(--primary-color);
+        }
+
+        .modal-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .modal-details {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .modal-amenities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .modal-amenity-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .modal-contact-button {
+            display: block;
+            background-color: var(--custom-gold);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .modal-contact-button:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Modal */
+        @media (max-width: 600px) {
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            .modal-title {
+                font-size: 1.8rem;
+            }
+            .modal-price {
+                font-size: 2rem;
+            }
+            .modal-image {
+                height: 200px;
+            }
+            .modal-contact-button {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            .modal-amenities {
+                grid-template-columns: 1fr; /* Stack on small screens */
+            }
         }
     </style>
 </head>
@@ -835,6 +969,7 @@
         </div>
         <nav class="main-nav">
             <a href="/home">Home</a>
+            <a href="/about">About</a>
             <a href="/layanan">Layanan</a>
             <a href="/portfolio">Portfolio</a>
             <a href="/property" class="active">Property</a>
@@ -868,203 +1003,29 @@
         <button class="category-btn" data-category="homestay">Homestay</button>
         </div>
 
-        <div id="semua" class="property-category active">
-            <h3>Tanah</h3>
-            <div class="property-grid">
-                <div class="property-card" style="--delay: 0s;">
-                    <div class="status-tag">For Sale</div> <img src="{{ asset('assets/images/proper1.png') }}" alt="Prime Commercial Land">
-                    <div class="property-card-content">
-                        <h3>Prime Commercial Land</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Surabaya</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 5000 sqm</div>
-                            <div class="amenity-item"><i class="fas fa-road"></i> Main Road Access</div>
-                        </div>  
-                        <div class="price">Rp 50 Juta/m²</div> 
-                        <a href="#" class="card-button prime-commercial-land">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.1s;">
-                    <div class="status-tag">For Sale</div>
-                    <img src="{{ asset('assets/images/tanah2.jpg') }}" alt="Tanah Investasi Bali">
-                    <div class="property-card-content">
-                        <h3>Tanah Investasi Premium</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Bali</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 2500 sqm</div>
-                            <div class="amenity-item"><i class="fas fa-tree"></i> Ocean View</div>
-                        </div>
-                        <div class="price">Rp 25 Juta/m²</div>
-                        <a href="/property/detail/tanah-bali" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.2s;">
-                    <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/tanah3.jpg') }}" alt="Kavling Siap Bangun Sleman">
-                    <div class="property-card-content">
-                        <h3>Kavling Siap Bangun Strategis</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Sleman, Yogyakarta</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 300 sqm</div>
-                            <div class="amenity-item"><i class="fas fa-city"></i> Near Amenities</div>
-                        </div>
-                        <div class="price">Rp 5 Juta/m²</div>
-                        <a href="/property/detail/kavling-sleman" class="card-button">View Property</a>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 60px;">Rumah</h3>
-            <div class="property-grid">
-                <div class="property-card" style="--delay: 0s;">
-                    <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/rumah1.jpg') }}" alt="The Elite Residence">
-                    <div class="property-card-content">
-                        <h3>The Elite Residence</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Yogyakarta</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 4 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 3 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-car"></i> 2 Garages</div>
-                        </div>
-                        <div class="price">Rp 2.5 M</div> <a href="/property/detail/elite-residence" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.1s;">
-                    <div class="status-tag">For Sale</div>
-                    <img src="{{ asset('assets/images/rumah2.jpg') }}" alt="Modern Living Apartment">
-                    <div class="property-card-content">
-                        <h3>Modern Living Apartment</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Jakarta Pusat</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 2 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 2 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-building"></i> Condo</div>
-                        </div>
-                        <div class="price">Rp 1.8 M</div>
-                        <a href="/property/detail/modern-apartment" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.2s;">
-                    <div class="status-tag">For Sale</div>
-                    <img src="{{ asset('assets/images/rumah3.jpg') }}" alt="Minimalist Townhouse">
-                    <div class="property-card-content">
-                        <h3>Minimalist Townhouse</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Bandung</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 3 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 2 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-car"></i> 1 Garage</div>
-                        </div>
-                        <div class="price">Rp 1.2 M</div>
-                        <a href="/property/detail/townhouse" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.3s;">
-                    <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/rumah4.jpg') }}" alt="Rumah Klasik Mewah">
-                    <div class="property-card-content">
-                        <h3>Rumah Klasik Mewah</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Jakarta Barat</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 5 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 4 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-car"></i> 3 Garages</div>
-                        </div>
-                        <div class="price">Rp 7.0 M</div>
-                        <a href="/property/detail/rumah-klasik" class="card-button">View Property</a>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 60px;">Toko</h3>
-            <div class="property-grid">
-                <div class="property-card" style="--delay: 0s;">
-                    <div class="status-tag">For Sale</div>
-                    <img src="{{ asset('assets/images/toko1.jpg') }}" alt="Toko Strategis Pusat Kota">
-                    <div class="property-card-content">
-                        <h3>Toko Strategis Pusat Kota</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Jakarta Pusat</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 150 sqm</div>
-                            <div class="amenity-item"><i class="fas fa-store"></i> High Traffic</div>
-                        </div>
-                        <div class="price">Rp 3.5 M</div>
-                        <a href="/property/detail/toko-pusat-kota" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.1s;">
-                    <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/toko2.jpg') }}" alt="Ruko Modern Commercial">
-                    <div class="property-card-content">
-                        <h3>Ruko Modern Commercial</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Tangerang</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 180 sqm</div>
-                            <div class="amenity-item"><i class="fas fa-building"></i> 2 Floors</div>
-                        </div>
-                        <div class="price">Rp 2.8 M</div>
-                        <a href="/property/detail/ruko-tangerang" class="card-button">View Property</a>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 60px;">Homestay</h3>
-            <div class="property-grid">
-                <div class="property-card" style="--delay: 0s;">
-                    <div class="status-tag">For Rent</div>
-                    <img src="{{ asset('assets/images/homestay1.jpg') }}" alt="Cozy Homestay Ubud">
-                    <div class="property-card-content">
-                        <h3>Cozy Homestay Ubud</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Ubud, Bali</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 3 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 2 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-person-shelter"></i> Private Pool</div>
-                        </div>
-                        <div class="price">Rp 1.5 Juta/Night</div>
-                        <a href="/property/detail/homestay-ubud" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.1s;">
-                    <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/homestay2.jpg') }}" alt="Mountain View Homestay">
-                    <div class="property-card-content">
-                        <h3>Mountain View Homestay</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Puncak, Bogor</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 4 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 3 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-mountain"></i> Scenic View</div>
-                        </div>
-                        <div class="price">Rp 1.2 Juta/Night</div>
-                        <a href="/property/detail/homestay-puncak" class="card-button">View Property</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <div id="tanah" class="property-category">
             <h3>Tanah</h3>
             <div class="property-grid">
                 <div class="property-card" style="--delay: 0s;">
-                    <div class="status-tag">For Sale</div> <img src="{{ asset('assets/images/proper1.png') }}" alt="Prime Commercial Land">
+                    <div class="status-tag">For Sale</div>
+                    <img src="{{ asset('assets/images/proper1.png') }}" alt="Prime Commercial Land">
                     <div class="property-card-content">
                         <h3>Prime Commercial Land</h3>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> Surabaya</div>
                         <div class="amenities">
                             <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 5000 sqm</div>
                             <div class="amenity-item"><i class="fas fa-road"></i> Main Road Access</div>
-                        </div>
-                        <div class="price">Rp 50 Juta/m²</div> <a href="/property/detail/commercial-land" class="card-button">View Property</a>
+                        </div> 
+                        <div class="price">Rp 50 Juta/m²</div> 
+                        <button class="card-button"
+                            data-title="Prime Commercial Land"
+                            data-image="{{ asset('assets/images/proper1.png') }}"
+                            data-location="Surabaya"
+                            data-price="Rp 50 Juta/m²"
+                            data-description="Tanah komersial sangat strategis di pusat kota Surabaya, cocok untuk pengembangan skala besar."
+                            data-amenities='[{"icon": "fas fa-ruler-combined", "text": "Luas: 5000 sqm"}, {"icon": "fas fa-road", "text": "Akses Jalan Utama"}, {"icon": "fas fa-lightbulb", "text": "Listrik Tersedia"}, {"icon": "fas fa-water", "text": "Air Bersih"}]'>
+                            View Property
+                        </button>
                     </div>
                 </div>
 
@@ -1079,7 +1040,15 @@
                             <div class="amenity-item"><i class="fas fa-tree"></i> Ocean View</div>
                         </div>
                         <div class="price">Rp 25 Juta/m²</div>
-                        <a href="/property/detail/tanah-bali" class="card-button">View Property</a>
+                        <button class="card-button"
+                            data-title="Tanah Investasi Premium"
+                            data-image="{{ asset('assets/images/tanah2.jpg') }}"
+                            data-location="Bali"
+                            data-price="Rp 25 Juta/m²"
+                            data-description="Tanah dengan pemandangan laut yang menakjubkan di Bali, ideal untuk villa atau resort mewah. Potensi kenaikan nilai yang tinggi."
+                            data-amenities='[{"icon": "fas fa-ruler-combined", "text": "Luas: 2500 sqm"}, {"icon": "fas fa-tree", "text": "Pemandangan Laut"}, {"icon": "fas fa-mountain", "text": "Dekat Pantai"}, {"icon": "fas fa-wifi", "text": "Area Wisata"}]'>
+                            View Property
+                        </button>
                     </div>
                 </div>
 
@@ -1094,7 +1063,15 @@
                             <div class="amenity-item"><i class="fas fa-city"></i> Near Amenities</div>
                         </div>
                         <div class="price">Rp 5 Juta/m²</div>
-                        <a href="/property/detail/kavling-sleman" class="card-button">View Property</a>
+                        <button class="card-button"
+                            data-title="Kavling Siap Bangun Strategis"
+                            data-image="{{ asset('assets/images/tanah3.jpg') }}"
+                            data-location="Sleman, Yogyakarta"
+                            data-price="Rp 5 Juta/m²"
+                            data-description="Kavling siap bangun di lokasi strategis Sleman, dekat dengan fasilitas umum dan kampus. Sangat cocok untuk hunian pribadi."
+                            data-amenities='[{"icon": "fas fa-ruler-combined", "text": "Luas: 300 sqm"}, {"icon": "fas fa-city", "text": "Dekat Fasilitas Umum"}, {"icon": "fas fa-school", "text": "Dekat Kampus"}, {"icon": "fas fa-shopping-bag", "text": "Area Komersil"}]'>
+                            View Property
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1114,7 +1091,16 @@
                             <div class="amenity-item"><i class="fas fa-bath"></i> 3 Baths</div>
                             <div class="amenity-item"><i class="fas fa-car"></i> 2 Garages</div>
                         </div>
-                        <div class="price">Rp 2.5 M</div> <a href="/property/detail/elite-residence" class="card-button">View Property</a>
+                        <div class="price">Rp 2.5 M</div>
+                        <button class="card-button"
+                            data-title="The Elite Residence"
+                            data-image="{{ asset('assets/images/rumah1.jpg') }}"
+                            data-location="Yogyakarta"
+                            data-price="Rp 2.5 M"
+                            data-description="Hunian mewah di jantung kota Yogyakarta dengan desain modern dan fasilitas lengkap. Ideal untuk keluarga besar."
+                            data-amenities='[{"icon": "fas fa-bed", "text": "4 Kamar Tidur"}, {"icon": "fas fa-bath", "text": "3 Kamar Mandi"}, {"icon": "fas fa-car", "text": "2 Garasi"}, {"icon": "fas fa-swimming-pool", "text": "Kolam Renang Pribadi"}, {"icon": "fas fa-tree", "text": "Taman Luas"}]'>
+                            View Property
+                        </button>
                     </div>
                 </div>
 
@@ -1127,42 +1113,17 @@
                         <div class="amenities">
                             <div class="amenity-item"><i class="fas fa-bed"></i> 2 Beds</div>
                             <div class="amenity-item"><i class="fas fa-bath"></i> 2 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-building"></i> Condo</div>
-                        </div>
-                        <div class="price">Rp 1.8 M</div>
-                        <a href="/property/detail/modern-apartment" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.2s;">
-                    <div class="status-tag">For Sale</div>
-                    <img src="{{ asset('assets/images/rumah3.jpg') }}" alt="Minimalist Townhouse">
-                    <div class="property-card-content">
-                        <h3>Minimalist Townhouse</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Bandung</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 3 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 2 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-car"></i> 1 Garage</div>
                         </div>
                         <div class="price">Rp 1.2 M</div>
-                        <a href="/property/detail/townhouse" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.3s;">
-                    <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/rumah4.jpg') }}" alt="Rumah Klasik Mewah">
-                    <div class="property-card-content">
-                        <h3>Rumah Klasik Mewah</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Jakarta Barat</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 5 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 4 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-car"></i> 3 Garages</div>
-                        </div>
-                        <div class="price">Rp 7.0 M</div>
-                        <a href="/property/detail/rumah-klasik" class="card-button">View Property</a>
+                        <button class="card-button"
+                            data-title="Modern Living Apartment"
+                            data-image="{{ asset('assets/images/rumah2.jpg') }}"
+                            data-location="Jakarta Pusat"
+                            data-price="Rp 1.2 M"
+                            data-description="Apartemen modern di pusat kota Jakarta, menawarkan gaya hidup dinamis dengan akses mudah ke pusat bisnis dan hiburan."
+                            data-amenities='[{"icon": "fas fa-bed", "text": "2 Kamar Tidur"}, {"icon": "fas fa-bath", "text": "2 Kamar Mandi"}, {"icon": "fas fa-dumbbell", "text": "Gym"}, {"icon": "fas fa-wifi", "text": "Akses Internet Cepat"}, {"icon": "fas fa-subway", "text": "Dekat Transportasi Umum"}]'>
+                            View Property
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1173,31 +1134,24 @@
             <div class="property-grid">
                 <div class="property-card" style="--delay: 0s;">
                     <div class="status-tag">For Sale</div>
-                    <img src="{{ asset('assets/images/toko1.jpg') }}" alt="Toko Strategis Pusat Kota">
+                    <img src="{{ asset('assets/images/toko1.jpg') }}" alt="Ruko Strategis Kota">
                     <div class="property-card-content">
-                        <h3>Toko Strategis Pusat Kota</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Jakarta Pusat</div>
+                        <h3>Ruko Strategis Kota</h3>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Bandung</div>
                         <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 150 sqm</div>
-                            <div class="amenity-item"><i class="fas fa-store"></i> High Traffic</div>
+                            <div class="amenity-item"><i class="fas fa-store"></i> 3 Lantai</div>
+                            <div class="amenity-item"><i class="fas fa-parking"></i> Luas Parkir</div>
                         </div>
                         <div class="price">Rp 3.5 M</div>
-                        <a href="/property/detail/toko-pusat-kota" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.1s;">
-                    <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/toko2.jpg') }}" alt="Ruko Modern Commercial">
-                    <div class="property-card-content">
-                        <h3>Ruko Modern Commercial</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Tangerang</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 180 sqm</div>
-                            <div class="amenity-item"><i class="fas fa-building"></i> 2 Floors</div>
-                        </div>
-                        <div class="price">Rp 2.8 M</div>
-                        <a href="/property/detail/ruko-tangerang" class="card-button">View Property</a>
+                        <button class="card-button"
+                            data-title="Ruko Strategis Kota"
+                            data-image="{{ asset('assets/images/toko1.jpg') }}"
+                            data-location="Bandung"
+                            data-price="Rp 3.5 M"
+                            data-description="Ruko 3 lantai di pusat kota Bandung, cocok untuk berbagai jenis usaha. Lokasi sangat ramai dan mudah diakses."
+                            data-amenities='[{"icon": "fas fa-store", "text": "3 Lantai"}, {"icon": "fas fa-parking", "text": "Luas Parkir"}, {"icon": "fas fa-money-bill-alt", "text": "Potensi Bisnis Tinggi"}, {"icon": "fas fa-road", "text": "Akses Utama"}]'>
+                            View Property
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1207,34 +1161,25 @@
             <h3>Homestay</h3>
             <div class="property-grid">
                 <div class="property-card" style="--delay: 0s;">
-                    <div class="status-tag">For Rent</div>
-                    <img src="{{ asset('assets/images/homestay1.jpg') }}" alt="Cozy Homestay Ubud">
-                    <div class="property-card-content">
-                        <h3>Cozy Homestay Ubud</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Ubud, Bali</div>
-                        <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 3 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 2 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-person-shelter"></i> Private Pool</div>
-                        </div>
-                        <div class="price">Rp 1.5 Juta/Night</div>
-                        <a href="/property/detail/homestay-ubud" class="card-button">View Property</a>
-                    </div>
-                </div>
-
-                <div class="property-card" style="--delay: 0.1s;">
                     <div class="status-tag">New Listing</div>
-                    <img src="{{ asset('assets/images/homestay2.jpg') }}" alt="Mountain View Homestay">
+                    <img src="{{ asset('assets/images/homestay1.jpg') }}" alt="Homestay Nyaman Pegunungan">
                     <div class="property-card-content">
-                        <h3>Mountain View Homestay</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Puncak, Bogor</div>
+                        <h3>Homestay Nyaman Pegunungan</h3>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Malang</div>
                         <div class="amenities">
-                            <div class="amenity-item"><i class="fas fa-bed"></i> 4 Beds</div>
-                            <div class="amenity-item"><i class="fas fa-bath"></i> 3 Baths</div>
-                            <div class="amenity-item"><i class="fas fa-mountain"></i> Scenic View</div>
+                            <div class="amenity-item"><i class="fas fa-bed"></i> 5 Kamar</div>
+                            <div class="amenity-item"><i class="fas fa-snowflake"></i> Udara Sejuk</div>
                         </div>
-                        <div class="price">Rp 1.2 Juta/Night</div>
-                        <a href="/property/detail/homestay-puncak" class="card-button">View Property</a>
+                        <div class="price">Rp 1.8 M</div>
+                        <button class="card-button"
+                            data-title="Homestay Nyaman Pegunungan"
+                            data-image="{{ asset('assets/images/homestay1.jpg') }}"
+                            data-location="Malang"
+                            data-price="Rp 1.8 M"
+                            data-description="Homestay dengan suasana pegunungan yang asri di Malang, ideal untuk liburan keluarga atau investasi sewa."
+                            data-amenities='[{"icon": "fas fa-bed", "text": "5 Kamar Tidur"}, {"icon": "fas fa-snowflake", "text": "Udara Sejuk"}, {"icon": "fas fa-mountain", "text": "Pemandangan Gunung"}, {"icon": "fas fa-wifi", "text": "Wi-Fi Tersedia"}]'>
+                            View Property
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1244,23 +1189,28 @@
 
     <section class="about-rnd-property">
         <div class="container">
-            <h2>Tentang RND Properti</h2>
-            <p>RND Properti adalah mitra terpercaya Anda dalam mencari dan mengembangkan properti. Dengan pengalaman bertahun-tahun, kami berdedikasi untuk menyediakan solusi properti yang inovatif dan terjangkau.</p>
+            <h2>Mengapa Memilih RND Properti?</h2>
+            <p>RND Properti berkomitmen untuk menyediakan pilihan properti terbaik dengan pelayanan profesional dan transparan. Kami hadir untuk membantu Anda menemukan investasi properti yang tepat atau rumah impian Anda.</p>
             <div class="features-grid">
                 <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Pilihan Terlengkap</h3>
+                    <p>Beragam jenis properti mulai dari tanah, rumah, hingga ruang komersial.</p>
+                </div>
+                <div class="feature-item">
                     <i class="fas fa-handshake"></i>
-                    <h3>Konsultan Terpercaya</h3>
-                    <p>Tim ahli kami siap memberikan saran terbaik untuk investasi properti Anda.</p>
+                    <h3>Konsultasi Ahli</h3>
+                    <p>Tim ahli kami siap memberikan saran terbaik sesuai kebutuhan Anda.</p>
                 </div>
                 <div class="feature-item">
-                    <i class="fas fa-building"></i>
-                    <h3>Pilihan Lengkap</h3>
-                    <p>Dari tanah strategis hingga rumah impian, kami punya semua untuk Anda.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-wallet"></i>
+                    <i class="fas fa-file-invoice-dollar"></i>
                     <h3>Harga Kompetitif</h3>
-                    <p>Kami menawarkan properti terbaik dengan harga yang bersaing di pasaran.</p>
+                    <p>Penawaran harga terbaik dengan nilai investasi yang menguntungkan.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Legalitas Terjamin</h3>
+                    <p>Semua properti kami memiliki dokumen legalitas yang lengkap dan aman.</p>
                 </div>
             </div>
         </div>
@@ -1271,129 +1221,138 @@
         <div class="testimonial-grid">
             <div class="testimonial-card">
                 <i class="fas fa-quote-left quote-icon"></i>
-                <p>"Prosesnya sangat mudah dan transparan. Saya mendapatkan tanah yang sempurna untuk investasi masa depan!"</p>
-                <div class="author">
-                    Budi Santoso
-                    <span>Investor Properti</span>
-                </div>
+                <p>"Proses pembelian tanah di RND Properti sangat mudah dan transparan. Pelayanannya cepat dan timnya sangat membantu. Sangat direkomendasikan!"</p>
+                <div class="author">Budi Santoso<span>Investor Properti</span></div>
             </div>
             <div class="testimonial-card">
                 <i class="fas fa-quote-left quote-icon"></i>
-                <p>"RND Properti membantu saya menemukan rumah impian dengan lokasi yang strategis dan harga yang sesuai budget. Sangat direkomendasikan!"</p>
-                <div class="author">
-                    Citra Dewi
-                    <span>Pembeli Rumah</span>
-                </div>
+                <p>"Saya menemukan rumah impian saya melalui RND Properti. Pilihan propertinya berkualitas dan saya merasa sangat terbantu dalam setiap langkahnya."</p>
+                <div class="author">Siti Aminah<span>Pembeli Rumah</span></div>
             </div>
             <div class="testimonial-card">
                 <i class="fas fa-quote-left quote-icon"></i>
-                <p>"Pelayanan yang luar biasa dan tim yang sangat responsif. Saya sangat puas dengan ruko yang saya beli untuk bisnis saya."</p>
-                <div class="author">
-                    Agus Salim
-                    <span>Pengusaha</span>
-                </div>
-            </div>
-        </div>
-        <div id="propertyModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h4 id="modalTitle">Detail Properti</h4>
-                <p id="modalDescription"></p>
+                <p>"Terima kasih RND Properti! Investasi ruko saya memberikan hasil yang luar biasa. Timnya profesional dan sangat memahami pasar properti."</p>
+                <div class="author">Dedi Iskandar<span>Pengusaha</span></div>
             </div>
         </div>
     </section>
 
     <section class="cta-section">
-        <h2>Siap Memulai Perjalanan Properti Anda?</h2>
-        <p>Hubungi kami sekarang untuk konsultasi gratis dan temukan properti yang paling sesuai dengan kebutuhan Anda.</p>
-        <a href="/contact" class="cta-button">Hubungi Kami</a>
+        <h2>Siap Memulai Investasi Properti Anda?</h2>
+        <p>Jangan lewatkan kesempatan untuk memiliki properti terbaik. Hubungi RND Properti hari ini untuk konsultasi gratis!</p>
+        <a href="/contact" class="cta-button">Hubungi Kami Sekarang</a>
     </section>
 
     <footer>
-        <p>&copy; 2023 RND Properti. All rights reserved.</p>
+        <p>&copy; 2025 RND Properti. All rights reserved.</p>
     </footer>
+
+    <div id="propertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modalImage" class="modal-image" src="" alt="Property Image">
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <div id="modalLocation" class="modal-location"><i class="fas fa-map-marker-alt"></i> <span></span></div>
+            <div id="modalPrice" class="modal-price"></div>
+            <p id="modalDescription" class="modal-details"></p>
+            <div id="modalAmenities" class="modal-amenities">
+                </div>
+            <a id="modalContactButton" href="#" class="modal-contact-button">Hubungi untuk Properti Ini</a>
+        </div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Category filtering
             const categoryButtons = document.querySelectorAll('.category-btn');
             const propertyCategories = document.querySelectorAll('.property-category');
 
-            // Fungsi untuk menampilkan kategori
-            function showCategory(categoryToShow) {
-                propertyCategories.forEach(category => {
-                    if (category.id === categoryToShow) {
-                        category.classList.add('active');
-                    } else {
-                        category.classList.remove('active');
-                    }
-                });
-            }
-
-            // Fungsi untuk mengaktifkan tombol
-            function activateButton(buttonToActivate) {
-                categoryButtons.forEach(button => {
-                    button.classList.remove('active');
-                });
-                buttonToActivate.classList.add('active');
-            }
-
-            // Tambahkan event listener ke setiap tombol
             categoryButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const category = this.dataset.category;
-                    activateButton(this);
-                    if (category === 'semua') {
-                        // Tampilkan semua kategori jika tombol "Semua Properti" ditekan
-                        propertyCategories.forEach(cat => cat.classList.add('active'));
+                    const targetCategory = this.dataset.category;
+
+                    // Remove active from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active to the clicked button
+                    this.classList.add('active');
+
+                    // Hide all categories
+                    propertyCategories.forEach(category => category.classList.remove('active'));
+
+                    // Show the target category or all if "Semua Properti" is clicked
+                    if (targetCategory === 'semua') {
+                        propertyCategories.forEach(category => category.classList.add('active'));
                     } else {
-                        // Sembunyikan semua dan tampilkan yang spesifik
-                        propertyCategories.forEach(cat => cat.classList.remove('active'));
-                        document.getElementById(category).classList.add('active');
+                        document.getElementById(targetCategory).classList.add('active');
                     }
                 });
             });
 
-            // Set kategori "Semua Properti" aktif secara default saat halaman dimuat
-            showCategory('semua');
-            document.querySelector('.category-btn[data-category="semua"]').classList.add('active');
-        });
-        
-        const propertyDetails = {
-        'prime-commercial-land': {
-            title: 'Prime Commercial Land',
-            description: 'Lokasi strategis, cocok untuk investasi.'
-        },
-        'ocean-view-villa': {
-            title: 'Ocean View Villa',
-            description: 'Villa dengan pemandangan laut indah.'
-        }
-        };
-
-        document.querySelectorAll('.card-button').forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            const classes = Array.from(this.classList);
-            const propClass = classes.find(c => c !== 'card-button');
-            const detail = propertyDetails[propClass];
-
-            if (detail) {
-            document.getElementById('modalTitle').textContent = detail.title;
-            document.getElementById('modalDescription').textContent = detail.description;
-            document.getElementById('propertyModal').style.display = 'flex';
+            // Initially activate "Semua Properti" and show all categories
+            // This is handled by the "category-buttons" div containing two rows,
+            // so we need to ensure the correct behavior for "Semua Properti"
+            const semuaBtn = document.querySelector('.category-btn[data-category="semua"]');
+            if (semuaBtn) {
+                semuaBtn.click(); // Simulate a click to show all initially
             }
+
+
+            // Modal functionality
+            const modal = document.getElementById('propertyModal');
+            const closeButton = document.querySelector('.close-button');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalLocation = document.querySelector('#modalLocation span');
+            const modalPrice = document.getElementById('modalPrice');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalAmenities = document.getElementById('modalAmenities');
+            const modalContactButton = document.getElementById('modalContactButton');
+            const cardButtons = document.querySelectorAll('.card-button');
+
+            cardButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const title = this.dataset.title;
+                    const image = this.dataset.image;
+                    const location = this.dataset.location;
+                    const price = this.dataset.price;
+                    const description = this.dataset.description;
+                    const amenities = JSON.parse(this.dataset.amenities); // Parse JSON string
+
+                    modalImage.src = image;
+                    modalImage.alt = title;
+                    modalTitle.textContent = title;
+                    modalLocation.textContent = location;
+                    modalPrice.textContent = price;
+                    modalDescription.textContent = description;
+
+                    // Clear previous amenities
+                    modalAmenities.innerHTML = '';
+                    // Populate amenities
+                    amenities.forEach(amenity => {
+                        const amenityItem = document.createElement('div');
+                        amenityItem.classList.add('modal-amenity-item');
+                        amenityItem.innerHTML = `<i class="${amenity.icon}"></i> ${amenity.text}`;
+                        modalAmenities.appendChild(amenityItem);
+                    });
+
+                    // You might want to customize the contact link based on the property
+                    modalContactButton.href = `/contact?property=${encodeURIComponent(title)}`;
+
+                    modal.classList.add('show');
+                });
+            });
+
+            closeButton.addEventListener('click', function() {
+                modal.classList.remove('show');
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.classList.remove('show');
+                }
+            });
         });
-        });
-
-        document.querySelector('.close').onclick = function () {
-        document.getElementById('propertyModal').style.display = 'none';
-        };
-
-        window.onclick = function (e) {
-        if (e.target.id === 'propertyModal') {
-            document.getElementById('propertyModal').style.display = 'none';
-        }
-        };
-
     </script>
 
 </body>

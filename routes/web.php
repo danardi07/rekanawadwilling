@@ -27,6 +27,11 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/debug-log', function() {
+    return nl2br(file_get_contents(storage_path('logs/laravel.log')));
+});
+
+
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 // HALAMAN ADMIN (CRUD)

@@ -1,0 +1,24 @@
+services:
+  app:
+    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:cache
+      php artisan migrate --force
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generate: true
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: crossover.proxy.rlwy.net
+      - key: DB_PORT
+        value: 12675
+      - key: DB_DATABASE
+        value: railway
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        value: symiTjXVpSrxgxPziQXlFlijsaueEWud

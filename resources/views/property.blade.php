@@ -76,7 +76,7 @@
         }
 
         .main-header .logo-area img {
-            height: 40px;
+            height: 50px;
         }
 
         .main-header .company-info {
@@ -86,7 +86,7 @@
 
         .main-header .company-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1;
@@ -117,83 +117,56 @@
         .main-header .main-nav a.active {
             color: var(--primary-color);
         }
-
-        /* HERO SECTION UNTUK HALAMAN PROPERTY */
-        .property-hero {
-            position: relative;
+         /* --- AKHIR HEADER & NAVIGASI BARU --- */
+        .hero-banner {
             width: 100%;
-            min-height: 350px;
-            background-image: url('{{ asset('assets/images/salaman.png') }}'); /* Ganti dengan gambar hero Anda */
+            height: 300px; /* Adjust height as needed */
+            background-image: url('{{ asset('assets/images/salaman.png') }}'); /* Ganti sesuai path gambarmu */
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             display: flex;
-            align-items: center;
-            padding: 0 40px;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            padding-left: 10%;
             box-sizing: border-box;
-            overflow: hidden;
-            text-align: left;
+            position: relative;
+            z-index: 1;
         }
 
-        .property-hero::after {
-            content: '';
+        .hero-banner::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Opasitas overlay */
-            z-index: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            z-index: -1;
         }
 
-        .property-hero .hero-content {
-            position: relative;
-            z-index: 1;
-            color: var(--text-light);
-            opacity: 0;
-            animation: fadeInLeft 1.2s ease-out forwards;
-            max-width: 1200px;
-            margin-left: 0;
-            margin-right: auto;
-            padding-left: 10px;
-        }
-
-        .property-hero .hero-content .breadcrumb {
-            font-size: 0.95rem;
+        .hero-banner .breadcrumbs {
+            font-size: 0.9em;
             margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .property-hero .hero-content .breadcrumb a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .property-hero .hero-content .breadcrumb a:hover {
+        .hero-banner .breadcrumbs a {
             color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero-banner .breadcrumbs a:hover {
             text-decoration: underline;
         }
 
-        .property-hero .hero-content .breadcrumb span {
-            color: white;
-            font-weight: 600;
-        }
-
-        .property-hero .hero-content h1 {
+        .hero-banner .page-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 4rem;
+            font-size: 3em;
             font-weight: 700;
             margin: 0;
-            line-height: 1.1;
-            color: white; /* Judul utama putih */
-        }
-
-        .property-hero .hero-content p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-            max-width: 600px;
-            animation: fadeInUp 1.5s ease forwards;
-            animation-delay: 0.6s;
+            animation: fadeInUp 1s ease-out forwards;
         }
 
         /* MAIN CONTENT - PROPERTI LISTING */
@@ -664,8 +637,8 @@
             background: var(--dark-bg);
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 60px;
+            padding: 5px;
+            margin-top: 100px;
             animation: fadeInUp 2.8s ease forwards;
             opacity: 0;
         }
@@ -963,8 +936,8 @@
         <div class="logo-area">
             <img src="{{ asset('assets/images/Logo.png') }}" alt="RND Logo">
             <div class="company-info">
-                <div class="company-name">RND Properti</div>
-                <div class="tagline">Contractor & Consultant</div>
+                <div class="company-name">Reka Nawa Dwelling</div>
+                <div class="tagline">Design and Build</div>
             </div>
         </div>
         <nav class="main-nav">
@@ -978,15 +951,11 @@
         </nav>
     </header>
 
-    <section class="property-hero">
-        <div class="hero-content">
-            <div class="breadcrumb">
-                <a href="/home">Home</a> > <span>Property</span>
-            </div>
-            <h1>Temukan Properti Impian Anda</h1>
-            <p>Jelajahi pilihan properti residensial, komersial, dan investasi terbaik dari RND Properti.</p>
+    <div class="hero-banner">
+        <div class="breadcrumbs">
+            <h1 class="page-title">Property</h1>
         </div>
-    </section>
+    </div>
 
     <section class="property-listing-section">
         <h2>Pilihan Properti Unggulan</h2>
@@ -1015,8 +984,8 @@
                         <div class="amenities">
                             <div class="amenity-item"><i class="fas fa-ruler-combined"></i> 5000 sqm</div>
                             <div class="amenity-item"><i class="fas fa-road"></i> Main Road Access</div>
-                        </div> 
-                        <div class="price">Rp 50 Juta/m²</div> 
+                        </div>
+                        <div class="price">Rp 50 Juta/m²</div>
                         <button class="card-button"
                             data-title="Prime Commercial Land"
                             data-image="{{ asset('assets/images/proper1.png') }}"

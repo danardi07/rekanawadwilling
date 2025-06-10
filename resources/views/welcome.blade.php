@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - RND Properti</title>
+    <title>rekanawadwelling</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Variabel CSS untuk Warna */
         :root {
-            --primary-color: #b40000; /* Merah gelap */
-            --secondary-color: gold; /* Kuning aksen */
-            --dark-bg: #111; /* Latar belakang gelap (dari kode Anda) */
-            --light-bg: #fff; /* Latar belakang terang */
-            --text-dark: #111; /* Teks gelap */
-            --text-light: white; /* Teks terang */
+            --primary-color: #b40000;
+            --secondary-color: gold;
+            --dark-bg: #111;
+            --light-bg: #fff;
+            --text-dark: #111;
+            --text-light: white;
             --border-color: #eee;
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif; /* Menggunakan Inter */
+            font-family: 'Inter', sans-serif;
             background: var(--light-bg);
             color: var(--text-dark);
-            overflow-x: hidden; /* Mencegah scrollbar horizontal karena animasi */
+            overflow-x: hidden;
             line-height: 1.6;
         }
+            html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-        /* DEFINISI ANIMASI */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -39,27 +42,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* --- HEADER & NAVIGASI BARU (Mengikuti Konsep Gambar) --- */
         .main-header {
-            background-color: var(--light-bg); /* Latar belakang putih */
+            background-color: var(--light-bg);
             padding: 15px 40px;
             display: flex;
-            justify-content: space-between; /* Logo kiri, Navigasi kanan */
+            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Bayangan halus */
-            animation: fadeInDown 1s ease-out forwards; /* Animasi untuk header */
-            position: relative; /* Untuk z-index */
-            z-index: 1000; /* Pastikan di atas hero */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease-out forwards;
+            position: relative;
+            z-index: 1000;
         }
 
         .main-header .logo-area {
@@ -69,7 +61,7 @@
         }
 
         .main-header .logo-area img {
-            height: 40px; /* Ukuran logo */
+            height: 50px;
         }
 
         .main-header .company-info {
@@ -78,42 +70,39 @@
         }
 
         .main-header .company-name {
-            font-family: 'Poppins', sans-serif; /* Menggunakan Poppins untuk nama perusahaan */
-            font-size: 1.5rem; /* Ukuran font lebih besar untuk nama perusahaan */
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: var(--primary-color); /* Warna merah untuk nama perusahaan */
-            line-height: 1; /* Hapus spasi ekstra */
+            color: var(--primary-color);
+            line-height: 1;
         }
 
         .main-header .tagline {
             font-size: 0.9rem;
             color: #555;
-            margin-top: 2px; /* Sesuaikan posisi vertikal */
+            margin-top: 2px;
             font-weight: 500;
         }
 
         .main-header .main-nav {
             display: flex;
-            gap: 25px; /* Jarak antara item navigasi */
+            gap: 25px;
         }
 
         .main-header .main-nav a {
-            color: #555; /* Warna teks link lebih gelap */
+            color: #555;
             text-decoration: none;
             font-weight: 600;
             padding: 8px 12px;
             border-radius: 5px;
-            transition: color 0.3s ease; /* Hanya transisi warna teks */
+            transition: color 0.3s ease;
         }
 
         .main-header .main-nav a:hover,
         .main-header .main-nav a.active {
-            color: var(--primary-color); /* Warna merah saat hover/aktif */
-            /* Tidak ada background color pada hover/active, hanya perubahan warna teks */
+            color: var(--primary-color);
         }
-        /* --- AKHIR HEADER & NAVIGASI BARU --- */
 
-        /* Hero Section */
         .hero {
             background: url('{{ asset('assets/images/okok.jpg') }}') no-repeat center center/cover;
             height: 450px;
@@ -123,6 +112,7 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
 
         .hero::before {
@@ -130,11 +120,21 @@
             position: absolute;
             inset: 0;
             background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero h1,
@@ -167,8 +167,8 @@
             display: inline-block;
             margin-top: 30px;
             padding: 12px 24px;
-            background: var(--dark-bg); /* Menggunakan variabel */
-            color: var(--text-light); /* Menggunakan variabel */
+            background: var(--dark-bg);
+            color: var(--text-light);
             text-decoration: none;
             border-radius: 8px;
             font-weight: bold;
@@ -180,15 +180,15 @@
             background: #333;
         }
 
-        /* Contact Section */
         .contact {
-            background: var(--primary-color); /* Menggunakan variabel */
+            background: var(--primary-color);
             color: white;
-            padding: 40px 20px;
+            padding: 50px 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
             gap: 30px;
+            margin-top: auto;
         }
 
         .contact div {
@@ -217,33 +217,46 @@
             margin: 5px 0;
             font-size: 15px;
         }
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            animation: fadeInUp 2.8s ease forwards;
+            opacity: 0;
+        }
 
-        /* Responsiveness */
         @media (max-width: 768px) {
             .main-header {
                 flex-direction: column;
                 text-align: center;
                 padding: 15px 20px;
             }
+
             .main-header .logo-area {
                 flex-direction: column;
                 margin-bottom: 15px;
             }
+
             .main-header .main-nav {
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 10px;
             }
+
             .hero h1 {
                 font-size: 36px;
             }
+
             .hero p {
                 font-size: 18px;
             }
+
             .contact {
                 flex-direction: column;
                 align-items: center;
             }
+
             .contact div {
                 min-width: unset;
                 width: 100%;
@@ -255,72 +268,89 @@
             .main-header .company-name {
                 font-size: 1.2rem;
             }
+
             .main-header .tagline {
                 font-size: 0.8rem;
             }
+
             .main-header .main-nav a {
                 padding: 6px 10px;
                 font-size: 0.9rem;
             }
+
             .hero h1 {
                 font-size: 30px;
             }
+
             .hero p {
                 font-size: 16px;
             }
+
             .hero .btn {
                 padding: 10px 20px;
                 font-size: 0.9rem;
             }
+
             .contact h3 {
                 font-size: 18px;
             }
+
             .contact p {
                 font-size: 14px;
             }
+
         }
     </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="logo-area">
-            <img src="{{ asset('assets/images/Logo.png') }}" alt="RND Logo">
-            <div class="company-info">
-                <div class="company-name">RND Properti</div>
-                <div class="tagline">Contractor & Consultant</div>
-            </div>
+<header class="main-header">
+    <div class="logo-area">
+        <img src="{{ asset('assets/images/Logo.png') }}" alt="RND Logo">
+        <div class="company-info">
+            <div class="company-name">Reka Nawa Dwelling</div>
+            <div class="tagline">Design and Build</div>
         </div>
-        <nav class="main-nav">
-            <a href="/home" class="active">Home</a> <a href="/layanan">Layanan</a>
-            <a href="/layanan">Layanan</a>
-            <a href="/portfolio">Portfolio</a>
-            <a href="/property">Property</a>
-            <a href="/homestay">Homestay</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    </header>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>COMPANY PROFILE</h1>
-            <p>Selamat Datang di RND Properti</p>
-            <p>Kami hadir dengan solusi arsitektur, kontraktor, dan properti yang inovatif dan berkelanjutan.</p>
-            <a href="/home" class="btn">Masuk ke Halaman Utama</a>
-        </div>
-    </section>
+    </div>
+</header>
 
-    <section class="contact" id="contact">
-        <div>
-            <h3>OUR CONTACT</h3>
-            <p>📞 +62 851-4765-2009 / +62 822-2324-0324</p>
-            <p>✉️ officialrnd09@gmail.com</p>
-            <p>📸 officialrnd09</p>
-        </div>
-        <div>
-            <h3>RESEARCH AND DEVELOPMENT</h3>
-            <p>Menciptakan solusi inovatif, berkelanjutan, dan berdampak positif melalui layanan arsitektur, kontraktor dan pengembangan properti.</p>
-        </div>
-    </section>
+<section class="hero">
+    <div id="particles-js"></div>
+
+    <div class="hero-content">
+        <h1>COMPANY PROFILE</h1>
+        <p>Selamat Datang di RND Properti</p>
+        <p>Kami hadir dengan solusi arsitektur, kontraktor, dan properti yang inovatif dan berkelanjutan.</p>
+        <a href="/home" class="btn">Masuk ke Halaman Utama</a>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div>
+        <h3>OUR CONTACT</h3>
+        <p>📞 +62 851-4765-2009 / +62 822-2324-0324</p>
+        <p>✉️ officialrnd09@gmail.com</p>
+        <p>📸 officialrnd09</p>
+    </div>
+    <div>
+        <h3>RESEARCH AND DEVELOPMENT</h3>
+        <p>Menciptakan solusi inovatif, berkelanjutan, dan berdampak positif melalui layanan arsitektur, kontraktor dan pengembangan properti.</p>
+    </div>
+</section>
+<footer>
+    <p>&copy; 2025 RND Properti. All rights reserved.</p>
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        particlesJS.load('particles-js', '{{ asset('particles.json') }}', function () {
+            console.log('Particles.js loaded');
+        });
+    });
+</script>
 
 </body>
 </html>

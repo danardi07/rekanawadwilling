@@ -68,7 +68,7 @@
         }
 
         .main-header .logo-area img {
-            height: 40px;
+            height: 50px;
         }
 
         .main-header .company-info {
@@ -78,7 +78,7 @@
 
         .main-header .company-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1;
@@ -111,75 +111,57 @@
         }
         /* --- AKHIR HEADER & NAVIGASI --- */
 
-        /* --- HERO SECTION PORTOFOLIO --- */
-        .portfolio-hero {
-            position: relative;
+         /* --- AKHIR HEADER & NAVIGASI BARU --- */
+        .hero-banner {
             width: 100%;
-            min-height: 300px;
-            background-image: url('{{ asset('assets/images/salaman.png') }}'); /* Gambar latar belakang baru yang Anda berikan */
+            height: 300px; /* Adjust height as needed */
+            background-image: url('{{ asset('assets/images/salaman.png') }}'); /* Ganti sesuai path gambarmu */
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            display: flex; /* Gunakan flexbox untuk pusatkan konten */
-            align-items: center; /* Pusatkan konten secara vertikal */
-            padding: 0 40px; /* Padding horizontal */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            padding-left: 10%;
             box-sizing: border-box;
-            overflow: hidden;
-            text-align: left; /* Pastikan teks di dalam konten tetap rata kiri */
+            position: relative;
+            z-index: 1;
         }
 
-        .portfolio-hero::after { /* Gunakan ::before untuk overlay */
-            content: '';
+        .hero-banner::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* OPASITAS DISAMAKAN DENGAN LAYANAN */
-            z-index: 0; /* Pastikan di bawah konten */
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            z-index: -1;
         }
 
-        .portfolio-hero .hero-content {
-            position: relative;
-            z-index: 1; /* Pastikan konten di atas overlay ::before */
-            color: white;
-            opacity: 0; /* Untuk animasi */
-            animation: fadeInLeft 1.2s ease-out forwards;
-            max-width: 1200px; /* Atur lebar maksimum konten */
-            margin-left: 0; /* Pastikan rata kiri */
-            margin-right: auto; /* Untuk menjaga rata kiri jika ada max-width */
-            padding-left: 10px; /* Sedikit padding dari tepi kiri */
-        }
-
-        .portfolio-hero .hero-content .breadcrumb {
-            font-size: 0.95rem;
+        .hero-banner .breadcrumbs {
+            font-size: 0.9em;
             margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .portfolio-hero .hero-content .breadcrumb a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .portfolio-hero .hero-content .breadcrumb a:hover {
+        .hero-banner .breadcrumbs a {
             color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero-banner .breadcrumbs a:hover {
             text-decoration: underline;
         }
 
-        .portfolio-hero .hero-content .breadcrumb span {
-            color: white;
-            font-weight: 600;
-        }
-
-        .portfolio-hero .hero-content h1 {
+        .hero-banner .port-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem; /* Ukuran font judul utama lebih besar */
+            font-size: 3em;
             font-weight: 700;
             margin: 0;
-            line-height: 1.1;
+            animation: fadeInUp 1s ease-out forwards;
         }
-
         /* Bagian responsive untuk hero section */
         @media (max-width: 768px) {
             .portfolio-hero {
@@ -455,7 +437,7 @@
             background: var(--dark-bg);
             color: white;
             text-align: center;
-            padding: 25px;
+            padding: 5px;
             margin-top: 60px;
             animation: fadeInUp 2.4s ease-out forwards;
             font-size: 0.9rem;
@@ -574,8 +556,8 @@
         <div class="logo-area">
             <img src="{{ asset('assets/images/Logo.png') }}" alt="RND Logo">
             <div class="company-info">
-                <div class="company-name">RND Properti</div>
-                <div class="tagline">Contractor & Consultant</div>
+                <div class="company-name">Reka Nawa Dwelling</div>
+                <div class="tagline">Design and Build</div>
             </div>
         </div>
         <nav class="main-nav">
@@ -589,15 +571,10 @@
         </nav>
     </header>
 
-{{-- Hero Section Portofolio --}}
-<div class="portfolio-hero">
-    <div class="hero-content">
-        <div class="breadcrumb">
-            <a href="/home">Home</a> &gt; <span>Portfolio</span> </div>
-        <h1>Portfolio</h1>
+   <div class="hero-banner">
+        <h1 class="port-title">Portofolio</h1>
     </div>
-</div>
-{{-- Akhir Hero Section Portofolio --}}
+{{-- Akhir Hero Section Layanan --}}
 
     <div class="container">
         <h1 class="page-title">Our Portfolio</h1>

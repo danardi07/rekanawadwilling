@@ -77,7 +77,7 @@
         }
 
         .main-header .logo-area img {
-            height: 40px; /* Ukuran logo */
+            height: 50px; /* Ukuran logo */
         }
 
         .main-header .company-info {
@@ -87,7 +87,7 @@
 
         .main-header .company-name {
             font-family: 'Poppins', sans-serif; /* Menggunakan Poppins untuk nama perusahaan */
-            font-size: 1.5rem; /* Ukuran font lebih besar untuk nama perusahaan */
+            font-size: 1.2rem; /* Ukuran font lebih besar untuk nama perusahaan */
             font-weight: 700;
             color: var(--primary-color); /* Warna merah untuk nama perusahaan */
             line-height: 1; /* Hapus spasi ekstra */
@@ -122,73 +122,55 @@
         /* --- AKHIR HEADER & NAVIGASI BARU --- */
 
         /* HERO SECTION UNTUK CONTACT (MIRIP DENGAN PORTFOLIO) */
-        .contact-hero {
-            position: relative;
+        .hero-banner {
             width: 100%;
-            min-height: 300px; /* Sesuaikan tinggi sesuai kebutuhan */
-            background-image: url('{{ asset('assets/images/salaman.png') }}'); /* Ganti dengan gambar hero untuk halaman contact */
+            height: 300px; /* Adjust height as needed */
+            background-image: url('{{ asset('assets/images/salaman.png') }}'); /* Ganti sesuai path gambarmu */
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             display: flex;
-            align-items: center;
-            padding: 0 40px;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            padding-left: 10%;
             box-sizing: border-box;
-            overflow: hidden;
-            text-align: left;
+            position: relative;
+            z-index: 1;
         }
 
-        .contact-hero::after {
-            content: '';
+        .hero-banner::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Opasitas overlay */
-            z-index: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            z-index: -1;
         }
 
-        .contact-hero .hero-content {
-            position: relative;
-            z-index: 1;
-            color: white;
-            opacity: 0; /* Untuk animasi */
-            animation: fadeInLeft 1.2s ease-out forwards;
-            max-width: 1200px;
-            margin-left: 0;
-            margin-right: auto;
-            padding-left: 10px;
-        }
-
-        .contact-hero .hero-content .breadcrumb {
-            font-size: 0.95rem;
+        .hero-banner .breadcrumbs {
+            font-size: 0.9em;
             margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .contact-hero .hero-content .breadcrumb a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-hero .hero-content .breadcrumb a:hover {
+        .hero-banner .breadcrumbs a {
             color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero-banner .breadcrumbs a:hover {
             text-decoration: underline;
         }
 
-        .contact-hero .hero-content .breadcrumb span {
-            color: white;
-            font-weight: 600;
-        }
-
-        .contact-hero .hero-content h1 {
+        .hero-banner .halaman {
             font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3em;
             font-weight: 700;
             margin: 0;
-            line-height: 1.1;
-            color: white;
+            animation: fadeInUp 1s ease-out forwards;
         }
         /* AKHIR HERO SECTION */
 
@@ -207,7 +189,6 @@
         }
 
         h1 {
-            color: var(--primary-color); /* Menggunakan variabel */
             margin-bottom: 10px;
         }
 
@@ -321,7 +302,7 @@
             background: var(--dark-bg); /* Menggunakan variabel */
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 5px;
             margin-top: 60px;
             animation: fadeInUp 2.2s ease forwards;
             opacity: 0;
@@ -402,8 +383,8 @@
         <div class="logo-area">
             <img src="{{ asset('assets/images/Logo.png') }}" alt="RND Logo">
             <div class="company-info">
-                <div class="company-name">RND Properti</div>
-                <div class="tagline">Contractor & Consultant</div>
+                <div class="company-name">Reka Nawa Dwelling</div>
+                <div class="tagline">Design and Build</div>
             </div>
         </div>
         <nav class="main-nav">
@@ -417,14 +398,10 @@
         </nav>
     </header>
 
-    <section class="contact-hero">
-        <div class="hero-content">
-            <div class="breadcrumb">
-                <a href="/home">Home</a> > <span>Contact</span>
-            </div>
-            <h1>Contact</h1>
-        </div>
-    </section>
+    <div class="hero-banner">
+        <h1 class="halaman">Contact</h1>
+    </div>
+
     <div class="container">
         <h2>Ada Pertanyaan Lain?</h2>
         <p class="intro">Hubungi kami jika anda memiliki pertanyaan lebih lanjut tentang Layanan Jasa kami, Harga dan lainnya. Tim kami siap melayani anda dengan senang hati.</p>

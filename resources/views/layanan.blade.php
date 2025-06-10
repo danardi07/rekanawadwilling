@@ -72,7 +72,7 @@
         }
 
         .main-header .logo-area img {
-            height: 40px; /* Ukuran logo */
+            height: 50px; /* Ukuran logo */
         }
 
         .main-header .company-info {
@@ -82,7 +82,7 @@
 
         .main-header .company-name {
             font-family: 'Poppins', sans-serif; /* Menggunakan Poppins untuk nama perusahaan */
-            font-size: 1.5rem; /* Ukuran font lebih besar untuk nama perusahaan */
+            font-size: 1.2rem; /* Ukuran font lebih besar untuk nama perusahaan */
             font-weight: 700;
             color: var(--primary-color); /* Warna merah untuk nama perusahaan */
             line-height: 1; /* Hapus spasi ekstra */
@@ -115,51 +115,59 @@
             /* Tidak ada background color pada hover/active, hanya perubahan warna teks */
         }
         /* --- AKHIR HEADER & NAVIGASI BARU --- */
-
-        /* --- LAYANAN HERO SECTION BARU --- */
-        .layanan-hero {
-            background-image: url('/assets/images/salaman.png'); /* Ganti dengan gambar latar belakang untuk halaman layanan */
+        .hero-banner {
+            width: 100%;
+            height: 300px;
+            background-image: url('{{ asset('assets/images/salaman.png') }}'); /* Using the provided image */
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            padding: 80px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             color: white;
+            padding-left: 10%;
+            box-sizing: border-box;
             position: relative;
-            text-align: left;
-        }
-
-        .layanan-hero::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.4); /* overlay gelap */
             z-index: 1;
         }
 
-        .layanan-hero .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px; /* Sesuaikan dengan lebar konten utama Anda */
-            margin-left: 0; /* Pastikan rata kiri */
-            margin-right: auto;
-            padding-left: 10px; /* Sedikit padding dari tepi kiri */
-            box-sizing: border-box; /* Pastikan padding tidak menambah lebar melebihi max-width */
-            text-align: left;
+        .hero-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            z-index: -1;
         }
 
-        .layanan-hero .breadcrumb {
-            font-size: 16px;
-            color: #ddd;
+        .hero-banner {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .layanan-hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-top: 10px;
+        .hero-banner .breadcrumbs a {
             color: white;
+            text-decoration: none;
+            font-weight: 500;
         }
+
+        .hero-banner .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .hero-banner .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3em;
+            font-weight: 700;
+            margin: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* --- LAYANAN HERO SECTION BARU --- */
+
         /* --- AKHIR LAYANAN HERO SECTION BARU --- */
 
         /* Kontainer Utama Halaman Layanan */
@@ -225,6 +233,7 @@
             background-color: var(--primary-color); /* Warna aktif seperti merah di desain utama */
             color: white;
         }
+
 
         /* Konten Utama Layanan */
         .layanan-content-area {
@@ -372,7 +381,7 @@
             background: var(--dark-bg); /* Menggunakan variabel */
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 5px;
             margin-top: 60px;
             opacity: 0; /* Mulai tersembunyi */
             animation: fadeInUp 1s ease-out forwards;
@@ -498,8 +507,8 @@
         <div class="logo-area">
             <img src="{{ asset('assets/images/Logo.png') }}" alt="RND Logo">
             <div class="company-info">
-                <div class="company-name">RND Properti</div>
-                <div class="tagline">Contractor & Consultant</div>
+                <div class="company-name">Reka Nawa Dwelling</div>
+                <div class="tagline">Design and Build</div>
             </div>
         </div>
         <nav class="main-nav">
@@ -514,14 +523,11 @@
     </header>
 
     {{-- Hero Section Layanan --}}
-    <div class="layanan-hero">
-        <div class="hero-content">
-            <div class="breadcrumb">
-                <a href="/home">Home</a> &gt; <span>Layanan</span>
-            </div>
-            <h1>Layanan Kami</h1>
-        </div>
+    <div class="hero-banner">
+        <h1 class="page-title">Layanan Kami</h1>
     </div>
+{{-- Akhir Hero Section Layanan --}}
+
     {{-- Akhir Hero Section Layanan --}}
 
     <div class="layanan-main-container">

@@ -55,7 +55,7 @@
         }
 
         .main-header .logo-area img {
-            height: 40px;
+            height: 50px;
         }
 
         .main-header .company-info {
@@ -65,7 +65,7 @@
 
         .main-header .company-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1;
@@ -447,7 +447,7 @@
             background: var(--dark-bg);
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 5px;
             margin-top: 60px;
             animation: fadeInUp 2.1s ease-out forwards;
         }
@@ -572,8 +572,8 @@
         <div class="logo-area">
             <img src="{{ asset('assets/images/Logo.png') }}" alt="RND Logo">
             <div class="company-info">
-                <div class="company-name">RND Properti</div>
-                <div class="tagline">Contractor & Consultant</div>
+                <div class="company-name">Reka Nawa Dwelling</div>
+                <div class="tagline">Design and Build</div>
             </div>
         </div>
         <nav class="main-nav">
